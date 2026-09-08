@@ -1,0 +1,20 @@
+{
+  "name": "@scalably-io/dataforseo-mcp",
+  "version": "1.0.0",
+  "description": "DataForSEO MCP wrapper: searchable API docs plus normalized calls to the official server. 4 tools.",
+  "mcpName": "io.scalably/dataforseo-mcp",
+  "type": "module",
+  "license": "MIT",
+  "author": "Scalably <hello@scalably.io>",
+  "homepage": "https://scalably.io/mcp/dataforseo-mcp",
+  "repository": { "type": "git", "url": "git+https://github.com/scalably-io/dataforseo-mcp.git" },
+  "bugs": { "url": "https://github.com/scalably-io/dataforseo-mcp/issues" },
+  "keywords": ["mcp", "model-context-protocol", "scalably", "dataforseo", "seo"],
+  "bin": { "scalably-dataforseo-mcp": "dist/index.js" },
+  "files": ["dist"],
+  "publishConfig": { "access": "public" },
+  "engines": { "node": ">=20" },
+  "scripts": { "build": "tsc", "test": "npm run build && node --test test/*.test.js", "generate": "node scripts/generate-tool-reference.mjs" },
+  "dependencies": { "dataforseo-mcp-server": "3.1.1" },
+  "devDependencies": { "@types/node": "26.5.0", "typescript": "7.0.2" }
+}

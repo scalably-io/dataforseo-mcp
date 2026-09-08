@@ -1,0 +1,131 @@
+{
+  "package": "dataforseo-mcp-server",
+  "packageVersion": "3.1.1",
+  "source": "https://github.com/dataforseo/mcp-server-typescript",
+  "tools": [
+    {
+      "name": "docs_index",
+      "title": "Docs Index",
+      "description": "Fetch the DataForSEO API documentation index (llms.txt), optionally filtered by section",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "section": {
+            "description": "Filter by API section (e.g. \"SERP API\")",
+            "type": "string"
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "docs_list_sections",
+      "title": "Docs List Sections",
+      "description": "Return available DataForSEO API documentation section names",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "docs_search",
+      "title": "Docs Search",
+      "description": "Fetch DataForSEO API documentation from a documentation URL",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "Documentation URL or path (e.g. https://docs.dataforseo.com/v3/serp/google/organic/live/regular or serp/google/organic/live/regular)"
+          },
+          "needCodeExample": {
+            "default": false,
+            "description": "Include multi-language code examples (PHP, Node.js, Python, C#)",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "api_request",
+      "title": "API Request",
+      "description": "Make an authenticated request to the DataForSEO API",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "enum": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ],
+            "description": "HTTP method"
+          },
+          "path": {
+            "description": "API path (e.g. /v3/serp/google/organic/live/regular)",
+            "type": "string"
+          },
+          "url": {
+            "description": "Full API URL (alternative to path)",
+            "type": "string"
+          },
+          "data": {
+            "description": "Request body as JSON object or array of task objects"
+          },
+          "noAiMode": {
+            "default": false,
+            "description": "Disable the .ai path suffix and return the full response schema instead of the AI-optimized subset. Can increase context size significantly. Default: false.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method"
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}

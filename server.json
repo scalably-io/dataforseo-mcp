@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.scalably/dataforseo-mcp",
+  "title": "DataForSEO MCP",
+  "description": "DataForSEO MCP wrapper: searchable API docs plus normalized calls to the official server. 4 tools.",
+  "repository": { "url": "https://github.com/scalably-io/dataforseo-mcp", "source": "github" },
+  "websiteUrl": "https://scalably.io/mcp/dataforseo-mcp",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@scalably-io/dataforseo-mcp",
+      "version": "1.0.0",
+      "runtimeHint": "npx",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "DATAFORSEO_USERNAME", "description": "DataForSEO account login (email) from the dashboard", "isRequired": true, "isSecret": true },
+        { "name": "DATAFORSEO_PASSWORD", "description": "DataForSEO account API password from the dashboard", "isRequired": true, "isSecret": true }
+      ]
+    }
+  ]
+}

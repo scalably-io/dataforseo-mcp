@@ -1,0 +1,35 @@
+{
+  "manifest_version": "0.4",
+  "name": "dataforseo-mcp",
+  "display_name": "DataForSEO MCP",
+  "version": "1.0.0",
+  "description": "DataForSEO MCP wrapper: searchable API docs plus normalized calls to the official server. 4 tools.",
+  "author": { "name": "Scalably", "email": "hello@scalably.io", "url": "https://scalably.io" },
+  "repository": { "type": "git", "url": "https://github.com/scalably-io/dataforseo-mcp" },
+  "homepage": "https://scalably.io/mcp/dataforseo-mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "scalably", "dataforseo", "seo"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "DATAFORSEO_USERNAME": "${user_config.username}",
+        "DATAFORSEO_PASSWORD": "${user_config.password}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "docs_index", "description": "Fetch the DataForSEO API documentation index (llms.txt), optionally filtered by section." },
+    { "name": "docs_list_sections", "description": "Return available DataForSEO API documentation section names." },
+    { "name": "docs_search", "description": "Fetch DataForSEO API documentation from a documentation URL." },
+    { "name": "api_request", "description": "Make an authenticated request to the DataForSEO API." }
+  ],
+  "user_config": {
+    "username": { "type": "string", "title": "DataForSEO API login", "description": "Account login (email) from the DataForSEO dashboard", "required": true, "sensitive": true },
+    "password": { "type": "string", "title": "DataForSEO API password", "description": "Account API password from the DataForSEO dashboard", "required": true, "sensitive": true }
+  },
+  "compatibility": { "claude_desktop": ">=0.10.0", "platforms": ["darwin", "win32", "linux"], "runtimes": { "node": ">=20" } }
+}
