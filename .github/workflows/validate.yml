@@ -14,4 +14,3 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm pack && node test/smoke-installed.mjs
-      - run: npx -y @anthropic-ai/mcpb@2.1.2 validate manifest.json

@@ -1,9 +1,0 @@
-.git/
-.github/
-src/
-test/
-*.tgz
-bootstrap.mjs
-RELEASING.md
-tsconfig.json
-.DS_Store

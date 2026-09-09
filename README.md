@@ -18,7 +18,7 @@ Codex:
 codex mcp add dataforseo --env DATAFORSEO_USERNAME=your-login --env DATAFORSEO_PASSWORD=your-password -- npx -y @scalably-io/dataforseo-mcp
 ```
 
-Claude Desktop: download `dataforseo-mcp.mcpb` from the latest GitHub release and open it.
+Claude Desktop: this wrapper ships on npm only (its upstream dependency makes a desktop bundle over 100 MB). Install DataForSEO's own server from https://github.com/dataforseo/mcp-server-typescript instead; the docs-search tools are the only thing you lose.
 
 ## Setup
 
@@ -54,7 +54,7 @@ Every tool returns plain JSON with `status` (`succeeded`, `partial`, `no_op`), `
 
 ## Verify
 
-Each release lists the package version, the `.mcpb` sha256 and the production commit it was derived from in CHANGELOG.md. CI runs the tests and a clean install of the packed tarball on every push.
+Each release lists the package version and the production commit it was derived from in CHANGELOG.md; npm publishes with provenance from GitHub Actions. CI runs the tests and a clean install of the packed tarball on every push.
 
 ## Privacy Policy
 
