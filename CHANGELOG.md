@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+- Failures surface as a tool error reading `<code>: <message> <hint>`, as the README promised; 1.0.0 returned a JSON object with `status: failed` instead.
+- The clean-install smoke runs with no credentials, proving `tools/list` needs none (1.0.0 injected placeholders and claimed the upstream refused to start without them, which is not the case).
+- README and server.json document the test-only `NODE_ENV` and `DATAFORSEO_PROXY_TEST_CHILD` variables and the `operation` reply key; CI validates `manifest.json` again.
+
 ## 1.0.0
 
 - First public release.

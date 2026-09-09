@@ -43,10 +43,11 @@ Use `docs_list_sections` or `docs_index` to pick an API family, then `docs_searc
 |---|---|---|
 | `DATAFORSEO_USERNAME` | yes | DataForSEO account login (email) from the dashboard |
 | `DATAFORSEO_PASSWORD` | yes | DataForSEO account API password from the dashboard |
+| `NODE_ENV`, `DATAFORSEO_PROXY_TEST_CHILD` | no | Test suite only: with `NODE_ENV=test` the wrapper spawns the fake child named by `DATAFORSEO_PROXY_TEST_CHILD` instead of the upstream server. Never set them in normal use |
 
 ## Reply shape
 
-Every tool returns plain JSON with `status` (`succeeded`, `partial`, `no_op`), `summary`, `target`, `result`, `proof`, `warnings`, `recovery`. Failures throw a plain error string: `<code>: <message> <hint>`. `api_request` normalizes DataForSEO's per-task status codes (pending tasks, no-result tasks, partial failures, and vendor error codes) into that shape instead of returning DataForSEO's raw task envelope unexamined.
+Every tool returns plain JSON with `status` (`succeeded`, `partial`, `no_op`), `operation`, `summary`, `target`, `result`, `proof`, `warnings`, `recovery`. Failures surface as a tool error whose text is `<code>: <message> <hint>`. `api_request` normalizes DataForSEO's per-task status codes (pending tasks, no-result tasks, partial failures, and vendor error codes) into that shape instead of returning DataForSEO's raw task envelope unexamined.
 
 ## Limits
 

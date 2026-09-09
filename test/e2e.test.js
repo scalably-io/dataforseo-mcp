@@ -102,11 +102,11 @@ test('proxy preserves exact four tools and normalizes all DataForSEO states', as
 
     const auth = await mcp.call('api_request', { method: 'GET', path: '/auth' });
     assert.equal(auth.result.isError, true);
-    assert.equal(JSON.parse(textOf(auth)).error.code, 'authentication_failed');
+    assert.match(textOf(auth), /^authentication_failed: /);
 
     const unstructured = await mcp.call('api_request', { method: 'GET', path: '/bad-text' });
     assert.equal(unstructured.result.isError, true);
-    assert.equal(JSON.parse(textOf(unstructured)).error.code, 'invalid_vendor_response');
+    assert.match(textOf(unstructured), /^invalid_vendor_response: /);
   } finally {
     await mcp.close();
   }

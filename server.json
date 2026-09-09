@@ -3,20 +3,41 @@
   "name": "io.scalably/dataforseo-mcp",
   "title": "DataForSEO MCP",
   "description": "DataForSEO MCP wrapper: searchable API docs plus normalized calls to the official server. 4 tools.",
-  "repository": { "url": "https://github.com/scalably-io/dataforseo-mcp", "source": "github" },
+  "repository": {
+    "url": "https://github.com/scalably-io/dataforseo-mcp",
+    "source": "github"
+  },
   "websiteUrl": "https://scalably.io/mcp/dataforseo-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@scalably-io/dataforseo-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "runtimeHint": "npx",
-      "transport": { "type": "stdio" },
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
-        { "name": "DATAFORSEO_USERNAME", "description": "DataForSEO account login (email) from the dashboard", "isRequired": true, "isSecret": true },
-        { "name": "DATAFORSEO_PASSWORD", "description": "DataForSEO account API password from the dashboard", "isRequired": true, "isSecret": true }
+        {
+          "name": "DATAFORSEO_USERNAME",
+          "description": "DataForSEO account login (email) from the dashboard",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "DATAFORSEO_PASSWORD",
+          "description": "DataForSEO account API password from the dashboard",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "DATAFORSEO_PROXY_TEST_CHILD",
+          "description": "Test suite only, with NODE_ENV=test: path of a fake child to spawn instead of the upstream server. Never set it in normal use",
+          "isRequired": false,
+          "isSecret": false
+        }
       ]
     }
   ]

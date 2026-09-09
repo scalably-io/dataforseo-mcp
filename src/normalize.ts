@@ -66,10 +66,14 @@ function target(args: Record<string, unknown>) {
 }
 
 function contentResult(envelope: Record<string, unknown>, isError = false): VendorResult {
-  return {
-    content: [{ type: 'text', text: JSON.stringify(envelope, null, 2) }],
-    ...(isError ? { isError: true } : {}),
-  };
+  if (isError) {
+    // Failures follow the plain reply contract: `<code>: <message> <hint>` as a tool error.
+    const error = (envelope.error ?? {}) as Record<string, unknown>;
+    const code = typeof error.code === 'string' ? error.code : 'request_failed';
+    const hint = typeof error.nextAction === 'string' ? error.nextAction : 'Correct the request before retrying.';
+    return { content: [{ type: 'text', text: `${code}: ${String(envelope.summary ?? 'Request failed.')} ${hint}` }], isError: true };
+  }
+  return { content: [{ type: 'text', text: JSON.stringify(envelope, null, 2) }] };
 }
 
 export function normalizeVendorResult(

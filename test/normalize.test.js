@@ -49,9 +49,8 @@ test('normalizes success, pending, no-result and partial DataForSEO task envelop
 
 test('maps vendor errors and optimized proof without inventing cost', () => {
   const auth = normalizeVendorResult('api_request', { method: 'GET', path: '/x' }, vendor({ status_code: 40100, status_message: 'Unauthorized', items: [] }, true));
-  const authEnvelope = parsed(auth);
   assert.equal(auth.isError, true);
-  assert.equal(authEnvelope.error.code, 'authentication_failed');
+  assert.match(auth.content[0].text, /^authentication_failed: .* Correct the DataForSEO API login\/password before retrying\.$/);
 
   const optimized = parsed(normalizeVendorResult('api_request', { method: 'GET', path: '/x' }, vendor({ status_code: 20000, status_message: 'Ok', items: [{ value: 1 }] })));
   assert.equal(optimized.status, 'succeeded');
@@ -61,10 +60,8 @@ test('maps vendor errors and optimized proof without inventing cost', () => {
 });
 
 test('child failure is fail-closed and marks paid request execution ambiguous', () => {
-  const result = parsed(childFailureResult('api_request', { method: 'POST', path: '/v3/serp/x' }, 'exited'));
-  assert.equal(result.status, 'failed');
-  assert.equal('changed' in result, false);
-  assert.equal(result.error.code, 'ambiguous_paid_request');
-  assert.equal(result.error.ambiguous, true);
-  assert.equal(result.error.retryable, false);
+  const result = childFailureResult('api_request', { method: 'POST', path: '/v3/serp/x' }, 'exited');
+  assert.equal(result.isError, true);
+  assert.match(result.content[0].text, /^ambiguous_paid_request: /);
+  assert.equal(result.content[0].text.includes('"schema"'), false);
 });

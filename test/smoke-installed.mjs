@@ -12,11 +12,9 @@ const expected = readme.split('\n').filter((l) => l.startsWith('| `')).map((l) =
 const tmp = fs.mkdtempSync('/tmp/smoke-');
 execFileSync('npm', ['init', '-y'], { cwd: tmp, stdio: 'ignore' });
 execFileSync('npm', ['install', '--no-audit', '--no-fund', path.join(root, tarball)], { cwd: tmp, stdio: 'ignore' });
-// The smoke has no real DataForSEO account. The pinned upstream child refuses to start
-// without credentials, so this test-only placeholder pair (never a server default) lets
-// it come up far enough to answer tools/list; api_request would fail auth if called.
+// No credentials on purpose: tools/list must work before the user configures anything.
 const child = spawn(path.join(tmp, 'node_modules', '.bin', bin), [], {
-  env: { ...process.env, DATAFORSEO_USERNAME: 'smoke-test@example.com', DATAFORSEO_PASSWORD: 'smoke-test-placeholder' },
+  env: { ...process.env },
   stdio: ['pipe', 'pipe', 'inherit'],
 });
 let out = '';
